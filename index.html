@@ -287,18 +287,17 @@
     padding: 14px 16px;
   }
   .keyword-list {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    column-gap: 22px;
+    margin: 0;
+  }
+  .keyword-list span {
     font-family: "Noto Sans KR", sans-serif;
     font-size: 0.92rem;
     font-weight: 600;
-    color: var(--prayer);
-    line-height: 1.9;
-    margin: 0;
-  }
-  .keyword-list .dot {
-    display: inline-block;
-    color: var(--text-muted);
-    font-weight: 400;
-    margin: 0 0.55em;
+    color: var(--text);
   }
 
 </style>
@@ -349,7 +348,7 @@
     <div class="keywords">
       <p class="keywords-label">기도제목</p>
       <div class="keyword-box">
-        <p class="keyword-list">하나님의 주권적 사랑<span class="dot">·</span>십자가<span class="dot">·</span>사랑의 확증<span class="dot">·</span>구원의 기쁨을 회복</p>
+        <p class="keyword-list"><span>하나님의 주권적 사랑</span><span>십자가</span><span>사랑의 확증</span><span>구원의 기쁨을 회복</span></p>
       </div>
     </div>
 
@@ -391,7 +390,7 @@
     <div class="keywords">
       <p class="keywords-label">기도제목</p>
       <div class="keyword-box">
-        <p class="keyword-list">온전한 사랑의 완성<span class="dot">·</span>하나님과의 친밀한 사귐</p>
+        <p class="keyword-list"><span>온전한 사랑의 완성</span><span>하나님과의 친밀한 사귐</span></p>
       </div>
     </div>
 
@@ -431,7 +430,7 @@
     <div class="keywords">
       <p class="keywords-label">기도제목</p>
       <div class="keyword-box">
-        <p class="keyword-list">새가족부<span class="dot">·</span>노방전도<span class="dot">·</span>행복축제<span class="dot">·</span>개인적인 기도제목</p>
+        <p class="keyword-list"><span>새가족부</span><span>노방전도</span><span>행복축제</span><span>개인적인 기도제목</span></p>
       </div>
     </div>
 
