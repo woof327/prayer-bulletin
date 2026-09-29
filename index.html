@@ -120,6 +120,44 @@
     width: 100%;
     height: auto;
     border-radius: 2px;
+    cursor: zoom-in;
+  }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(10, 9, 6, 0.86);
+    cursor: zoom-out;
+  }
+  .lightbox.is-open { display: flex; }
+  .lightbox img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  }
+  .lightbox-close {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
   }
   .plate-caption {
     font-family: "Noto Sans KR", sans-serif;
@@ -423,6 +461,44 @@
   </section>
 
 </div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="닫기" type="button">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+  (function () {
+    var lightbox = document.getElementById("lightbox");
+    var lightboxImg = document.getElementById("lightboxImg");
+    var closeBtn = document.getElementById("lightboxClose");
+
+    function open(src, alt) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || "";
+      lightbox.classList.add("is-open");
+    }
+    function close() {
+      lightbox.classList.remove("is-open");
+      lightboxImg.src = "";
+    }
+
+    document.querySelectorAll(".plate img").forEach(function (img) {
+      img.addEventListener("click", function () {
+        open(img.currentSrc || img.src, img.alt);
+      });
+    });
+
+    lightbox.addEventListener("click", close);
+    closeBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      close();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") close();
+    });
+  })();
+</script>
 
 </body>
 </html>
