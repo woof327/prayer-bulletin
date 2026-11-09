@@ -1,0 +1,1220 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>새가족부 기도회</title>
+<meta name="description" content="새가족부 기도회 순서지">
+<meta name="theme-color" content="#f2efea">
+<meta name="color-scheme" content="light only">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Hahmlet:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f2efea;
+  --paper-deep: #e7e2da;
+  --ink: #682c26;
+  --ink-soft: #8c5850;
+  --text: #2b2422;
+  --text-muted: #6e625e;
+  --rule: color-mix(in srgb, var(--ink) 20%, transparent);
+  --scrim: #000;
+  --gutter: 16px;
+  --display: "Hahmlet", "Noto Serif KR", serif;
+  --read: "Noto Serif KR", serif;
+  color-scheme: light;
+}
+:root[data-ink="cocoa"] { --ink: #5c3a34; --ink-soft: #86675f; }
+:root[data-ink="black"] { --ink: #2a2725; --ink-soft: #6f6a66; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 64px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--read);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.85;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .2 0 0 0 .2 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+::selection { background: var(--ink); color: var(--paper); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 10px; border: 2px solid var(--paper); }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- step rail ---------- */
+.rail {
+  position: sticky; top: 0; z-index: 50;
+  background: #f8f6f2;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 28%, transparent);
+  padding-top: env(safe-area-inset-top);
+  transition: box-shadow .3s ease;
+}
+.rail.is-scrolled { box-shadow: 0 6px 18px -8px rgba(40, 32, 30, 0.35), 0 1px 3px rgba(40, 32, 30, 0.08); }
+.rail-in { max-width: 760px; margin: 0 auto; display: flex; align-items: center; padding-right: 8px; }
+.ink-toggle {
+  flex: none; display: inline-flex; align-items: center; gap: 8px;
+  height: 34px; padding: 0 11px; border-radius: 999px;
+  border: 1px solid var(--rule); background: var(--paper); cursor: pointer;
+}
+.ink-toggle i { width: 12px; height: 12px; border-radius: 50%; display: block; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); transition: transform .2s; }
+.ink-toggle i[data-v="brick"] { background: #682c26; }
+.ink-toggle i[data-v="cocoa"] { background: #5c3a34; }
+.ink-toggle i[data-v="black"] { background: #2a2725; }
+.ink-toggle i.on { transform: scale(1.35); box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--ink); }
+.rail ol {
+  list-style: none; margin: 0; padding: 0 var(--gutter);
+  flex: 1; min-width: 0;
+  display: flex; gap: 2px;
+  overflow-x: auto; scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
+  mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
+}
+.rail ol::-webkit-scrollbar { display: none; }
+.rail a {
+  display: block;
+  padding: 14px 9px 12px;
+  font-family: var(--display); font-weight: 700;
+  font-size: 14px; line-height: 1; letter-spacing: -0.01em;
+  color: var(--text-muted);
+  text-decoration: none; white-space: nowrap;
+  position: relative;
+  transition: color .2s;
+}
+.rail a::after {
+  content: ""; position: absolute; left: 9px; right: 9px; bottom: -1px; height: 3px;
+  background: var(--ink); border-radius: 3px 3px 0 0;
+  transform: scaleX(0); transition: transform .35s cubic-bezier(.16,1,.3,1);
+}
+.rail a[aria-current="step"] { color: var(--ink); }
+.rail a[aria-current="step"]::after { transform: scaleX(1); }
+.rail a:hover { color: var(--ink); }
+
+
+/* ---------- layout ---------- */
+main { padding: 0 var(--gutter); }
+.wrap { max-width: 640px; margin: 0 auto; }
+
+/* ---------- hero ---------- */
+.hero {
+  padding-top: clamp(56px, 12vw, 120px);
+  text-align: center;
+}
+.title {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 700;
+  color: var(--ink);
+  font-size: clamp(38px, 12.8vw, 68px);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+.hero-hands {
+  display: block;
+  width: min(64%, 330px);
+  margin: clamp(22px, 6vw, 34px) auto 0;
+  color: var(--ink);
+  position: relative; z-index: 1;
+  overflow: visible;
+}
+.caption {
+  margin: 18px auto 0;
+  font-family: var(--display); font-weight: 700;
+  color: var(--ink);
+  font-size: clamp(15px, 3.9vw, 19px);
+  line-height: 1.45; letter-spacing: -0.02em;
+  max-width: 30em;
+  text-wrap: balance;
+}
+.caption cite { display: block; margin-top: 8px; font-style: normal; font-size: 14px; color: var(--ink-soft); white-space: nowrap; }
+
+/* order of service */
+.order {
+  margin: clamp(56px, 12vw, 96px) auto 0;
+  text-align: left;
+}
+.order h2 {
+  font-family: var(--display); font-weight: 800; color: var(--ink);
+  font-size: 32px; letter-spacing: -0.03em; line-height: 1.2;
+  margin: 0 0 14px; text-align: center;
+}
+.order ol { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--ink); }
+.order li { border-bottom: 1px solid var(--rule); }
+.order li:last-child { border-bottom: 1.5px solid var(--ink); }
+.order a {
+  display: grid; grid-template-columns: 5.6em 1fr auto; align-items: baseline; gap: 12px;
+  padding: 14px 4px; text-decoration: none;
+  transition: background-color .2s;
+}
+.order a:hover { background: var(--paper-deep); }
+.order .k { font-family: var(--display); font-weight: 800; color: var(--ink); font-size: 16px; letter-spacing: -0.02em; }
+.order .v { font-size: 16.5px; line-height: 1.5; color: var(--text); }
+.order .v small { display: block; font-size: 13.5px; color: var(--text-muted); }
+.order .go { width: 16px; height: 16px; color: var(--ink); align-self: center; opacity: .7; }
+
+/* ---------- steps ---------- */
+.step { padding-top: clamp(88px, 18vw, 140px); }
+.step-head { text-align: center; }
+.step-head h2 {
+  margin: 0;
+  font-family: var(--display); font-weight: 900; color: var(--ink);
+  font-size: clamp(44px, 12.5vw, 76px);
+  line-height: 1.02; letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.step-head .sub {
+  margin: 12px 0 0;
+  font-family: var(--display); font-weight: 700; color: var(--ink-soft);
+  font-size: 17px; letter-spacing: -0.01em; line-height: 1.4;
+}
+.step-wall { display: block; width: min(100%, 460px); margin: 28px auto 0; color: var(--ink); }
+
+/* praise */
+.praise .step-head h2 { font-size: clamp(36px, 10vw, 60px); }
+.score {
+  margin: 28px auto 0;
+  display: grid; gap: 14px;
+  max-width: 460px;
+}
+.score-btn {
+  appearance: none; border: 0; padding: 0; margin: 0; background: none; color: inherit;
+  font: inherit; text-align: left; cursor: zoom-in; width: 100%;
+  display: block; position: relative;
+}
+.score-sheet {
+  display: block; width: 100%;
+  aspect-ratio: 1 / 1.3;
+  background: #fbf9f5;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(40,32,30,.12), 0 10px 30px -12px rgba(40,32,30,.35);
+  overflow: hidden;
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+}
+.score-sheet:has(img) { aspect-ratio: auto; background: #fff; padding: clamp(10px, 3vw, 18px) clamp(10px, 3vw, 18px) 60px; }
+.score-sheet img { width: 100%; height: auto; display: block; }
+.score-btn:hover .score-sheet { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(40,32,30,.14), 0 18px 40px -14px rgba(40,32,30,.42); }
+.score-btn:active .score-sheet { transform: scale(.99); }
+.score-tag {
+  position: absolute; right: 12px; bottom: 12px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 12px 8px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 42%, transparent); color: #fff;
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  font-family: var(--display); font-weight: 700; font-size: 13.5px; line-height: 1;
+  box-shadow: none;
+}
+.score-tag svg { width: 15px; height: 15px; }
+.placeholder-sheet { color: var(--ink); }
+.placeholder-sheet text { font-family: var(--display); }
+
+/* scripture */
+.passage { margin: 40px auto 0; max-width: 36rem; }
+.passage h3 {
+  font-family: var(--display); font-weight: 800; color: var(--ink);
+  font-size: 24px; letter-spacing: -0.03em; line-height: 1.3;
+  margin: 0 0 6px;
+}
+.ref {
+  font-family: var(--display); font-weight: 800; color: var(--ink);
+  font-size: 19px; letter-spacing: -0.02em; line-height: 1.3;
+  margin: 0 0 10px;
+}
+.verse { margin: 0 0 14px; }
+.verse sup {
+  font-family: var(--display); font-weight: 800; color: var(--ink);
+  font-size: 0.66em; vertical-align: 0.42em; line-height: 0;
+  margin-right: 0.38em; font-variant-numeric: lining-nums;
+}
+.ref + .ref-gap { height: 0; }
+.ref-block + .ref-block { margin-top: 28px; }
+
+.linked { margin-top: 44px; }
+.linked .item { padding: 18px 0; border-top: 1px solid var(--rule); }
+.linked .item:last-child { border-bottom: 1px solid var(--rule); }
+.linked .ref { font-size: 16px; margin-bottom: 6px; }
+.linked p { margin: 0; font-size: 16.5px; line-height: 1.85; color: var(--text); }
+
+/* closing */
+.closing { padding: clamp(96px, 20vw, 160px) 0 calc(72px + env(safe-area-inset-bottom)); text-align: center; }
+.closing .people { display: block; width: min(100%, 460px); margin: 0 auto; color: var(--ink); overflow: visible; }
+.closing cite { display: block; margin-top: 8px; font-style: normal; font-size: 14px; color: var(--ink-soft); white-space: nowrap; }
+.closing p {
+  margin: 20px auto 0; max-width: 24em;
+  font-family: var(--display); font-weight: 700; color: var(--ink);
+  font-size: 16px; line-height: 1.6; letter-spacing: -0.01em; text-wrap: balance;
+}
+
+/* wall drawing motion */
+.wall .stone { transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
+.js-anim .wall:not(.is-built) .stone { opacity: 0; transform: translateY(-10px); }
+
+/* ---------- viewer ---------- */
+.viewer {
+  position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0; background: var(--scrim); color: #f2f2f2;
+  overscroll-behavior: contain;
+}
+.viewer::backdrop { background: transparent; }
+.viewer[open] { display: grid; grid-template-rows: auto 1fr auto; animation: vin .3s cubic-bezier(.16,1,.3,1); }
+@keyframes vin { from { opacity: 0; } to { opacity: 1; } }
+.viewer-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: max(10px, env(safe-area-inset-top)) 12px 10px 18px;
+}
+.viewer-title { flex: 1; min-width: 0; font-family: var(--display); font-weight: 700; font-size: 16px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vbtn {
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.06); color: inherit; display: grid; place-items: center; cursor: pointer;
+  transition: background-color .2s;
+}
+.vbtn:hover { background: rgba(255,255,255,.16); }
+.vbtn:disabled { opacity: .3; cursor: default; }
+.vbtn svg { width: 20px; height: 20px; }
+.vbtn[hidden] { display: none; }
+.viewer-stage { position: relative; overflow: hidden; touch-action: none; cursor: grab; }
+.viewer-stage.is-dragging { cursor: grabbing; }
+.viewer-page {
+  position: absolute; left: 50%; top: 50%;
+  transform-origin: 0 0; will-change: transform;
+  user-select: none; -webkit-user-drag: none;
+  background: #fbf9f5; box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.viewer-foot {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 10px 12px max(14px, env(safe-area-inset-bottom));
+  font-family: var(--display); font-weight: 700; font-size: 14px;
+}
+.viewer-hint { color: rgba(255,255,255,.6); font-family: var(--read); font-weight: 400; font-size: 13px; }
+.viewer-count { min-width: 3.5em; text-align: center; font-variant-numeric: tabular-nums; }
+
+@media (min-width: 720px) {
+  body { font-size: 19px; }
+  .score:has(> :nth-child(2)) { max-width: 640px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<nav class="rail" id="rail" aria-label="기도회 순서">
+  <div class="rail-in">
+  <ol>
+    <li><a href="#praise-1">Praise 1</a></li>
+    <li><a href="#prayer-1">Section 1</a></li>
+    <li><a href="#praise-2">Praise 2</a></li>
+    <li><a href="#prayer-2">Section 2</a></li>
+    <li><a href="#praise-3">Praise 3</a></li>
+    <li><a href="#prayer-3">Section 3</a></li>
+    <li><a href="#praise-4">Blessing</a></li>
+  </ol>
+  <button class="ink-toggle" id="inkToggle" type="button" aria-label="잉크 색 바꾸기: 벽돌 적갈색">
+    <i data-v="brick"></i><i data-v="cocoa"></i><i data-v="black"></i>
+  </button>
+  </div>
+</nav>
+
+<main>
+  <header class="hero wrap">
+    <h1 class="title">새가족부 기도회</h1>
+    <svg class="hero-hands" viewBox="0 0 839 1178" role="img" aria-label="두 손을 모아 기도하는 그림 (알브레히트 뒤러, 「기도하는 손」)">
+      <filter id="ink-tint" color-interpolation-filters="sRGB">
+        <feFlood id="handsInk" flood-color="#682c26" result="ink"/>
+        <feComposite in="ink" in2="SourceAlpha" operator="in"/>
+      </filter>
+      <image href="assets/praying-hands.png" width="839" height="1178" filter="url(#ink-tint)"/>
+    </svg>
+    <p class="caption">원하건대 주는 눈을 들어<br>종의 간구함과<br>주의 백성 이스라엘의 간구함을 보시고<br>주께 부르짖는 대로 들으시옵소서<cite>열왕기상 8:52</cite></p>
+
+    <section class="order" aria-labelledby="order-h">
+      <h2 id="order-h">순서</h2>
+      <ol>
+        <li><a href="#praise-1"><span class="k">Praise 1</span><span class="v">합심</span><svg class="go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a></li>
+        <li><a href="#prayer-1"><span class="k">Section 1</span><span class="v">느헤미야 1:3–6</span><svg class="go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a></li>
+        <li><a href="#praise-2"><span class="k">Praise 2</span><span class="v">함께 쌓아가는</span><svg class="go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a></li>
+        <li><a href="#prayer-2"><span class="k">Section 2</span><span class="v">느헤미야 2:17–18, 4:6</span><svg class="go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a></li>
+        <li><a href="#praise-3"><span class="k">Praise 3</span><span class="v">영광에서 영광으로</span><svg class="go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a></li>
+        <li><a href="#prayer-3"><span class="k">Section 3</span><span class="v">느헤미야 6:15–16</span><svg class="go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a></li>
+        <li><a href="#praise-4"><span class="k">Blessing</span><span class="v">감사해요 깨닫지 못했었는데</span><svg class="go" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a></li>
+      </ol>
+    </section>
+  </header>
+
+  <!-- 찬양 1 -->
+  <section class="step praise wrap" id="praise-1" data-score="praise1" aria-labelledby="praise-1-h">
+    <div class="step-head">
+      <h2 id="praise-1-h">합심</h2>
+    </div>
+    <div class="score"></div>
+  </section>
+
+  <!-- 기도 1 -->
+  <section class="step wrap" id="prayer-1" aria-labelledby="prayer-1-h">
+    <div class="step-head">
+      <h2 id="prayer-1-h">Section 1</h2>
+      <p class="sub">느헤미야 1:3–6</p>
+      <svg class="step-wall wall" data-wall="ruin" data-seed="3" viewBox="0 0 600 300" role="img" aria-label="허물어진 성벽과 불탄 성문 그림"></svg>
+    </div>
+    <div class="passage">
+      <div class="ref-block">
+        <p class="ref">느헤미야 1:3–6</p>
+        <p class="verse"><sup>3</sup>그들이 내게 이르되 사로잡힘을 면하고 남아 있는 자들이 그 지방 거기에서 큰 환난을 당하고 능욕을 받으며 예루살렘 성은 허물어지고 성문들은 불탔다 하는지라</p>
+        <p class="verse"><sup>4</sup>내가 이 말을 듣고 앉아서 울고 수일 동안 슬퍼하며 하늘의 하나님 앞에 금식하며 기도하여</p>
+        <p class="verse"><sup>5</sup>이르되 하늘의 하나님 여호와 크고 두려우신 하나님이여 주를 사랑하고 주의 계명을 지키는 자에게 언약을 지키시며 긍휼을 베푸시는 주여 간구하나이다</p>
+        <p class="verse"><sup>6</sup>이제 종이 주의 종들인 이스라엘 자손을 위하여 주야로 기도하오며 우리 이스라엘 자손이 주께 범죄한 죄들을 자복하오니 주는 귀를 기울이시며 눈을 여시사 종의 기도를 들으시옵소서 나와 내 아버지의 집이 범죄하여</p>
+      </div>
+      <div class="linked">
+        <div class="item">
+          <p class="ref">열왕기상 8:52</p>
+          <p>원하건대 주는 눈을 들어 종의 간구함과 주의 백성 이스라엘의 간구함을 보시고 주께 부르짖는 대로 들으시옵소서</p>
+        </div>
+        <div class="item">
+          <p class="ref">예레미야애가 5:21</p>
+          <p>여호와여 우리를 주께로 돌이키소서 그리하시면 우리가 주께로 돌아가겠사오니 우리의 날들을 다시 새롭게 하사 옛적 같게 하옵소서</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 찬양 2 -->
+  <section class="step praise wrap" id="praise-2" data-score="praise2" aria-labelledby="praise-2-h">
+    <div class="step-head">
+      <h2 id="praise-2-h">함께 쌓아가는</h2>
+    </div>
+    <div class="score"></div>
+  </section>
+
+  <!-- 기도 2 -->
+  <section class="step wrap" id="prayer-2" aria-labelledby="prayer-2-h">
+    <div class="step-head">
+      <h2 id="prayer-2-h">Section 2</h2>
+      <p class="sub">느헤미야 2:17–18, 4:6</p>
+      <svg class="step-wall wall" data-wall="half" data-seed="7" viewBox="0 0 600 300" role="img" aria-label="절반 높이까지 다시 쌓인 성벽 그림"></svg>
+    </div>
+    <div class="passage">
+      <div class="ref-block">
+        <p class="ref">느헤미야 2:17–18</p>
+        <p class="verse"><sup>17</sup>후에 그들에게 이르기를 우리가 당한 곤경은 너희도 보고 있는 바라 예루살렘이 황폐하고 성문이 불탔으니 자, 예루살렘 성을 건축하여 다시 수치를 당하지 말자 하고</p>
+        <p class="verse"><sup>18</sup>또 그들에게 하나님의 선한 손이 나를 도우신 일과 왕이 내게 이른 말씀을 전하였더니 그들의 말이 일어나 건축하자 하고 모두 힘을 내어 이 선한 일을 하려 하매</p>
+      </div>
+      <div class="ref-block">
+        <p class="ref">느헤미야 4:6</p>
+        <p class="verse"><sup>6</sup>이에 우리가 성을 건축하여 전부가 연결되고 높이가 절반에 이르렀으니 이는 백성이 마음 들여 일을 하였음이니라</p>
+      </div>
+      <div class="linked">
+        <div class="item">
+          <p class="ref">에베소서 4:16</p>
+          <p>그에게서 온 몸이 각 마디를 통하여 도움을 받음으로 연결되고 결합되어 각 지체의 분량대로 역사하여 그 몸을 자라게 하며 사랑 안에서 스스로 세우느니라</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 찬양 3 -->
+  <section class="step praise wrap" id="praise-3" data-score="praise3" aria-labelledby="praise-3-h">
+    <div class="step-head">
+      <h2 id="praise-3-h">영광에서 영광으로</h2>
+    </div>
+    <div class="score"></div>
+  </section>
+
+  <!-- 기도 3 -->
+  <section class="step wrap" id="prayer-3" aria-labelledby="prayer-3-h">
+    <div class="step-head">
+      <h2 id="prayer-3-h">Section 3</h2>
+      <p class="sub">느헤미야 6:15–16</p>
+      <svg class="step-wall wall" data-wall="complete" data-seed="5" viewBox="0 0 600 300" role="img" aria-label="완성된 성벽과 성문 그림"></svg>
+    </div>
+    <div class="passage">
+      <div class="ref-block">
+        <p class="ref">느헤미야 6:15–16</p>
+        <p class="verse"><sup>15</sup>성벽 역사가 오십이 일 만인 엘룰월 이십오일에 끝나매</p>
+        <p class="verse"><sup>16</sup>우리의 모든 대적과 주위에 있는 이방 족속들이 이를 듣고 다 두려워하여 크게 낙담하였으니 그들이 우리 하나님께서 이 역사를 이루신 것을 앎이니라</p>
+      </div>
+      <div class="linked">
+        <div class="item">
+          <p class="ref">에스라 3:12</p>
+          <p>제사장들과 레위 사람들과 나이 많은 족장들은 첫 성전을 보았으므로 이제 이 성전의 기초가 놓임을 보고 대성통곡하였으나 여러 사람은 기쁨으로 크게 함성을 지르니</p>
+        </div>
+        <div class="item">
+          <p class="ref">학개 2:5</p>
+          <p>너희가 애굽에서 나올 때에 내가 너희와 언약한 말과 나의 영이 계속하여 너희 가운데에 머물러 있나니 너희는 두려워하지 말지어다</p>
+        </div>
+        <div class="item">
+          <p class="ref">학개 2:9</p>
+          <p>이 성전의 나중 영광이 이전 영광보다 크리라 만군의 여호와의 말이니라 내가 이 곳에 평강을 주리라 만군의 여호와의 말이니라</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 축복찬양 -->
+  <section class="step praise wrap" id="praise-4" data-score="praise4" aria-labelledby="praise-4-h">
+    <div class="step-head">
+      <h2 id="praise-4-h">감사해요<br>깨닫지 못했었는데</h2>
+    </div>
+    <div class="score"></div>
+  </section>
+
+  <footer class="closing wrap">
+    <svg class="people" id="people" viewBox="0 0 600 400" role="img" aria-label="예수님과 사람들이 손을 잡고 서 있는 그림"></svg>
+    <p>근심하지 말라<br>여호와로 인하여 기뻐하는 것이<br>너희의 힘이니라<cite>느헤미야 8:10</cite></p>
+  </footer>
+</main>
+
+<dialog class="viewer" id="viewer" aria-labelledby="viewerTitle">
+  <div class="viewer-bar">
+    <div class="viewer-title" id="viewerTitle"></div>
+    <button class="vbtn" type="button" data-act="fit" aria-label="화면에 맞추기">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+    </button>
+    <button class="vbtn" type="button" data-act="close" aria-label="닫기">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="viewer-stage" id="stage"></div>
+  <div class="viewer-foot">
+    <button class="vbtn" type="button" data-act="prev" aria-label="이전 장">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <span class="viewer-count" id="viewerCount"></span>
+    <button class="vbtn" type="button" data-act="next" aria-label="다음 장">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</dialog>
+
+<script>
+/* =========================================================
+   악보 설정 — 이미지 파일을 scores/ 폴더에 넣고 경로를 적어 주세요.
+   한 곡에 여러 장이면 배열에 순서대로 추가합니다.
+   예) praise1: ["scores/01-합심-1.jpg", "scores/01-합심-2.jpg"]
+   ========================================================= */
+const SCORES = {
+  praise1: { title: "합심", pages: [] },
+  praise2: { title: "함께 쌓아가는", pages: ["scores/02-together.png"] },
+  praise3: { title: "영광에서 영광으로", pages: ["scores/03-glory.png"] },
+  praise4: { title: "감사해요 깨닫지 못했었는데", pages: ["scores/04-thanks.jpg"] },
+};
+
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  const root = document.documentElement;
+
+  /* ---------- ink colour: brick / cocoa / black ---------- */
+  const INKS = [["brick", "벽돌 적갈색"], ["cocoa", "코코아 갈색"], ["black", "검정"]];
+  const inkBtn = document.getElementById("inkToggle");
+  const setInk = (v) => {
+    if (v === "brick") delete root.dataset.ink; else root.dataset.ink = v;
+    inkBtn.querySelectorAll("i").forEach((d) => d.classList.toggle("on", d.dataset.v === v));
+    // some browsers never re-resolve currentColor inside an SVG filter, so set the hands' ink explicitly
+    const fl = document.getElementById("handsInk");
+    if (fl) fl.setAttribute("flood-color", getComputedStyle(root).getPropertyValue("--ink").trim());
+    inkBtn.setAttribute("aria-label", `잉크 색 바꾸기: ${INKS.find((x) => x[0] === v)[1]}`);
+  };
+  let ink = "brick";
+  try { const v = localStorage.getItem("ink"); if (INKS.some((x) => x[0] === v)) ink = v; } catch (e) {}
+  setInk(ink);
+  inkBtn.addEventListener("click", (e) => {
+    const hit = e.target.closest("i");
+    ink = hit ? hit.dataset.v : INKS[(INKS.findIndex((x) => x[0] === ink) + 1) % INKS.length][0];
+    setInk(ink);
+    try { localStorage.setItem("ink", ink); } catch (e2) {}
+  });
+
+  /* ---------- engraved wall drawing ---------- */
+  function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
+  const el = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent && parent.appendChild(n); return n; };
+  const f = (n) => n.toFixed(1);
+
+  function stonePath(x, y, w, h, r) {
+    const j = () => (r() - 0.5) * 3.4;
+    const c = Math.min(3.2, h * 0.14);
+    const p = [
+      [x + c + j(), y + j()], [x + w * 0.5 + j(), y + j() * 0.6], [x + w - c + j(), y + j()],
+      [x + w + j(), y + c + j()], [x + w + j() * 0.6, y + h * 0.5 + j()], [x + w + j(), y + h - c + j()],
+      [x + w - c + j(), y + h + j()], [x + w * 0.5 + j(), y + h + j() * 0.6], [x + c + j(), y + h + j()],
+      [x + j(), y + h - c + j()], [x + j() * 0.6, y + h * 0.5 + j()], [x + j(), y + c + j()],
+    ];
+    let d = `M${f(p[0][0])} ${f(p[0][1])}`;
+    for (let i = 1; i <= p.length; i++) {
+      const a = p[i % p.length], b = p[(i + 1) % p.length];
+      if (i % 3 === 0) d += ` Q${f(a[0])} ${f(a[1])} ${f((a[0] + b[0]) / 2)} ${f((a[1] + b[1]) / 2)}`;
+      else d += ` L${f(a[0])} ${f(a[1])}`;
+    }
+    return d + "Z";
+  }
+
+  function hatch(g, x, y, w, h, r, density, cross) {
+    // shading along the lower edge and right edge of a stone
+    let d = "";
+    const n = Math.round(w / (density || 5));
+    for (let i = 0; i < n; i++) {
+      const hx = x + 3 + (i / n) * (w - 6);
+      const len = h * (0.18 + r() * 0.22);
+      d += `M${f(hx)} ${f(y + h - 2)} l${f(len * 0.55)} ${f(-len)}`;
+    }
+    const m = Math.round(h / 5);
+    for (let i = 0; i < m; i++) {
+      const hy = y + 4 + (i / m) * (h - 7);
+      d += `M${f(x + w - 2)} ${f(hy)} l${f(-(3 + r() * 5))} ${f(1.5)}`;
+    }
+    if (cross) {
+      for (let i = 0; i < n; i += 2) {
+        const hx = x + 3 + (i / n) * (w - 6);
+        d += `M${f(hx)} ${f(y + h - 2 - h * 0.25)} l${f(h * 0.2)} ${f(h * 0.18)}`;
+      }
+    }
+    el("path", { d, class: "h" }, g);
+  }
+
+  function crack(g, x, y, w, h, r) {
+    let cx = x + w * (0.25 + r() * 0.5), cy = y + 2, d = `M${f(cx)} ${f(cy)}`;
+    for (let k = 0; k < 3; k++) { cx += (r() - 0.5) * 10; cy += h / 3.2; d += ` L${f(cx)} ${f(cy)}`; }
+    el("path", { d, class: "h" }, g);
+  }
+
+  function drawWall(svg) {
+    // fire damage: charred faces, soot climbing from the top course
+    function scorch(g, x, y, w, h, top) {
+      const heavy = top ? rb() < 0.85 : rb() < 0.4;
+      if (!heavy) return;
+      const from = top ? 0.1 : 0.35 + rb() * 0.3;      // how far down the face the char reaches
+      el("rect", { x: f(x + 2), y: f(y + 2), width: f(w - 4), height: f((h - 4) * (1 - from) + 0.01), class: "char" }, g);
+      let d = "";
+      for (let hx = x + 3; hx < x + w - 5; hx += 2.6) {
+        d += `M${f(hx)} ${f(y + 2 + rb() * 3)} l${f(3)} ${f((h - 5) * (0.5 + rb() * 0.5))}`;
+        if (rb() < 0.7) d += `M${f(hx + 3)} ${f(y + 3)} l${f(-3)} ${f((h - 6) * (0.4 + rb() * 0.5))}`;
+      }
+      el("path", { d, class: "h" }, g);
+      if (top) {
+        let sd = "";
+        for (let k = 0; k < 2 + Math.round(rb() * 2); k++) {
+          const sx = x + 6 + rb() * (w - 12), len = 10 + rb() * 22;
+          sd += `M${f(sx)} ${f(y)} c${f(-4)} ${f(-len * 0.3)} ${f(5)} ${f(-len * 0.6)} ${f(rb() * 4 - 2)} ${f(-len)}`;
+        }
+        el("path", { d: sd, class: "h", style: "opacity:.5" }, g);
+      }
+    }
+    // a charred timber: rough burnt ends, alligatored grain
+    function beam(parent, x, y, len, th, ang) {
+      const g = el("g", { transform: `rotate(${f(ang)} ${f(x)} ${f(y)})` }, parent);
+      let o = `M${f(x)} ${f(y)} L${f(x + len)} ${f(y + rb() * 2)}`;
+      for (let k = 1; k <= 3; k++) o += ` L${f(x + len + (k % 2 ? 4 : -2) * rb())} ${f(y + (th * k) / 3)}`;
+      o += ` L${f(x)} ${f(y + th)}`;
+      for (let k = 2; k >= 0; k--) o += ` L${f(x - (k % 2 ? 5 : 1) * rb())} ${f(y + (th * k) / 3)}`;
+      el("path", { d: o + "Z", class: "char-strong" }, g);
+      el("path", { d: o + "Z", class: "o" }, g);
+      let c = "";
+      for (let cx = x + 4; cx < x + len - 3; cx += 4 + rb() * 3) c += `M${f(cx)} ${f(y + 1)} l${f(rb() * 2 - 1)} ${f(th - 2)}`;
+      c += `M${f(x + 2)} ${f(y + th / 2 + rb() * 2 - 1)} L${f(x + len - 2)} ${f(y + th / 2)}`;
+      el("path", { d: c, class: "h" }, g);
+    }
+
+    const kind = svg.dataset.wall;
+    const r = rng(+svg.dataset.seed || 1);
+    const rb = rng((+svg.dataset.seed || 1) * 7919 + 13);   // fire damage only
+    const W = 600, ground = 268, courseH = 28, courses = 7;
+    const gate = { cx: 300, w: 92, top: ground - 150 };
+    const small = !!svg.dataset.small;
+
+    const style = el("style", {}, svg);
+    style.textContent = `.o{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+      .h{fill:none;stroke:currentColor;stroke-width:.9;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.85}
+      .f{fill:currentColor;opacity:.08}
+      .char{fill:currentColor;opacity:.16}
+      .char-strong{fill:currentColor;opacity:.42}`;
+
+    // height profile per x (in courses)
+    const heightAt = (x) => {
+      if (kind === "complete") return courses;
+      if (kind === "half") return 4 + (Math.abs(x - 300) < 110 ? 0 : 0);
+      // ruin: jagged, low, with gaps
+      const t = x / W;
+      // mostly stumps and open breaches, with a few broken fragments still standing
+      const base = 0.2 + 4.4 * Math.abs(Math.sin(t * 5.2 + 0.9)) * (0.6 + 0.4 * Math.sin(t * 2.6 + 2));
+      let hgt = Math.max(0, Math.min(3, Math.round(base + (r() - 0.5) * 1.8)));
+      if (x >= 420 && x <= 560) hgt = Math.max(hgt, 2);   // a low surviving stretch on the right
+      return hgt;
+    };
+    const cols = [];
+    for (let x = 0; x <= W; x += 20) cols.push(heightAt(x));
+    const hAt = (x) => cols[Math.max(0, Math.min(cols.length - 1, Math.round(x / 20)))];
+
+    const inGate = (x0, x1, y0, y1) => {
+      const gl = gate.cx - gate.w / 2 - 6, gr = gate.cx + gate.w / 2 + 6;
+      if (x1 < gl || x0 > gr) return false;
+      const archY = gate.top + gate.w / 2 + 6;
+      if (y1 > archY) return true;
+      // within arch curve
+      const R = gate.w / 2 + 14;
+      const corners = [[x0, y1], [x1, y1], [(x0 + x1) / 2, y0]];
+      return corners.some(([px, py]) => Math.hypot(px - gate.cx, py - archY) < R);
+    };
+
+    const stones = el("g", {}, svg);
+    // ground debris registry: each item may overlap at most one other, never a third
+    const debris = [];
+    const box = (cx, cy, w, h, deg) => { const a = deg * Math.PI / 180, c = Math.abs(Math.cos(a)), s2 = Math.abs(Math.sin(a)); return { cx, cy, hw: (w * c + h * s2) / 2 * 0.88, hh: (w * s2 + h * c) / 2 * 0.88, n: 0 }; };
+    const hits = (b) => debris.filter((d) => Math.abs(d.cx - b.cx) < d.hw + b.hw && Math.abs(d.cy - b.cy) < d.hh + b.hh);
+    const tryPlace = (b) => { const hs = hits(b); if (hs.length > 1 || (hs.length === 1 && hs[0].n > 0)) return false; hs.forEach((d) => { d.n++; b.n++; }); debris.push(b); return true; };
+    // courses, built bottom-up so motion can stagger by course
+    for (let c = 0; c < courses; c++) {
+      const y = ground - (c + 1) * courseH;
+      const course = el("g", { class: "stone", style: `transition-delay:${c * 90}ms` }, stones);
+      let x = c % 2 ? -22 : -4;
+      while (x < W) {
+        const w = 38 + r() * 58;
+        const x0 = Math.max(6, x + 1.5), x1 = Math.min(W - 6, x + w - 1.5);
+        x += w;
+        if (x1 - x0 < 14) continue;
+        const mid = (x0 + x1) / 2;
+        if (c >= hAt(mid)) continue;
+        if (inGate(x0, x1, y, y + courseH)) continue;
+        // ruin: the top surviving stone of a column is sometimes knocked askew
+        const top = c === hAt(mid) - 1;
+        // ruin: knocked-out holes in the face
+        if (kind === "ruin" && c > 0 && !top && r() < 0.14) continue;
+        const g = el("g", {}, course);
+        if (kind === "ruin" && top && r() < 0.8) g.setAttribute("transform", `translate(${f((r() - 0.5) * 8)} ${f(r() * 4)}) rotate(${f((r() - 0.5) * 40)} ${f(mid)} ${f(y + courseH / 2)})`);
+        else if (kind === "ruin" && r() < 0.3) g.setAttribute("transform", `rotate(${f((r() - 0.5) * 10)} ${f(mid)} ${f(y + courseH / 2)})`);
+        el("path", { d: stonePath(x0, y + 1.5, x1 - x0, courseH - 3, r), class: "o" }, g);
+        hatch(g, x0, y + 1.5, x1 - x0, courseH - 3, r, kind === "ruin" ? 4 : 5.5, kind === "ruin" && r() < 0.4);
+        if (r() < (kind === "ruin" ? 0.35 : 0.12)) crack(g, x0, y + 1.5, x1 - x0, courseH - 3, r);
+        if (kind === "ruin") scorch(g, x0, y + 1.5, x1 - x0, courseH - 3, top);
+        if (kind === "ruin" && c < 2) debris.push(box(mid, y + courseH / 2, x1 - x0, courseH, 0));
+      }
+    }
+
+    // gate arch (voussoirs) + doorway
+    const archY = gate.top + gate.w / 2;
+    const Ri = gate.w / 2, Ro = gate.w / 2 + 16;
+    const gateTopVisible = kind !== "ruin";
+    const archG = el("g", { class: "stone", style: `transition-delay:${courses * 90}ms` }, svg);
+    if (gateTopVisible && kind === "complete") {
+      const n = 9;
+      for (let i = 0; i < n; i++) {
+        const a0 = Math.PI + (i / n) * Math.PI, a1 = Math.PI + ((i + 1) / n) * Math.PI;
+        const pts = [
+          [gate.cx + Math.cos(a0) * Ri, archY + Math.sin(a0) * Ri],
+          [gate.cx + Math.cos(a0) * Ro, archY + Math.sin(a0) * Ro],
+          [gate.cx + Math.cos(a1) * Ro, archY + Math.sin(a1) * Ro],
+          [gate.cx + Math.cos(a1) * Ri, archY + Math.sin(a1) * Ri],
+        ];
+        const d = `M${f(pts[0][0])} ${f(pts[0][1])} L${f(pts[1][0])} ${f(pts[1][1])} A${Ro} ${Ro} 0 0 1 ${f(pts[2][0])} ${f(pts[2][1])} L${f(pts[3][0])} ${f(pts[3][1])} A${Ri} ${Ri} 0 0 0 ${f(pts[0][0])} ${f(pts[0][1])}Z`;
+        el("path", { d, class: "o" }, archG);
+      }
+    }
+    // jambs
+    const jl = gate.cx - Ri, jr = gate.cx + Ri;
+    const jambTop = kind === "complete" ? archY : kind === "half" ? ground - 4 * courseH : ground - 2 * courseH + 8;
+    if (kind === "half") {
+      // timber gate frame awaiting its doors: two posts, a lintel, a brace
+      const pw = 9, lt = jambTop - 14;
+      const fr = `M${f(jl - pw)} ${ground} L${f(jl - pw)} ${f(lt)} L${f(jr + pw)} ${f(lt)} L${f(jr + pw)} ${ground} M${f(jl)} ${ground} L${f(jl)} ${f(jambTop)} L${f(jr)} ${f(jambTop)} L${f(jr)} ${ground}`;
+      el("path", { d: fr, class: "o" }, archG);
+      let gr = "";
+      for (let k = 0; k < 9; k++) { const gx = jl - pw + 6 + k * ((jr - jl + 2 * pw - 12) / 8); gr += `M${f(gx)} ${f(lt + 3)} l${f(4)} ${f(8)}`; }
+      for (let y = ground - 8; y > lt + 18; y -= 9) { gr += `M${f(jl - pw + 2)} ${f(y)} l${f(pw - 4)} -3 M${f(jr + 2)} ${f(y)} l${f(pw - 4)} -3`; }
+      gr += `M${f(jl)} ${f(jambTop + 30)} L${f(jl + 26)} ${f(jambTop)} M${f(jr)} ${f(jambTop + 30)} L${f(jr - 26)} ${f(jambTop)}`;
+      el("path", { d: gr, class: "h" }, archG);
+    } else {
+      el("path", { d: `M${f(jl)} ${ground} L${f(jl)} ${f(jambTop)} M${f(jr)} ${ground} L${f(jr)} ${f(jambTop)}`, class: "o" }, archG);
+    }
+
+    // doors
+    const doorG = el("g", { class: "stone", style: `transition-delay:${courses * 90 + 120}ms` }, svg);
+    const doorTop = kind === "complete" ? archY : jambTop;
+    if (kind === "ruin") {
+      // burned gate: charred, splintered planks lying low, dense cross-hatch
+      let d = "";
+      for (let i = 0; i < 7; i++) {
+        const px = jl + 6 + i * ((jr - jl - 12) / 6);
+        const ht = 14 + r() * 34;
+        d += `M${f(px)} ${ground} L${f(px + (r() - 0.5) * 6)} ${f(ground - ht)} L${f(px + 4 + (r() - 0.5) * 4)} ${f(ground - ht + 6 + r() * 6)}`;
+      }
+      el("path", { d, class: "o" }, doorG);
+      let hd = "";
+      for (let i = 0; i < 18; i++) {
+        const hx = jl + 4 + r() * (jr - jl - 8), hy = ground - 4 - r() * 36;
+        hd += `M${f(hx)} ${f(hy)} l${f(6 + r() * 6)} ${f(-6 - r() * 6)} M${f(hx + 2)} ${f(hy - 8)} l${f(8)} ${f(8)}`;
+      }
+      el("path", { d: hd, class: "h" }, doorG);
+    } else if (kind === "complete") {
+      // two-leaf door with planks and studs
+      const dg = el("g", {}, doorG);
+      const dPath = `M${f(jl + 3)} ${ground} L${f(jl + 3)} ${f(archY)} A${Ri - 3} ${Ri - 3} 0 0 1 ${f(jr - 3)} ${f(archY)} L${f(jr - 3)} ${ground}`;
+      el("path", { d: dPath, class: "f" }, dg);
+      el("path", { d: dPath, class: "o" }, dg);
+      el("path", { d: `M${gate.cx} ${f(archY - Ri + 3)} L${gate.cx} ${ground}`, class: "o" }, dg);
+      let pd = "";
+      for (let px = jl + 12; px < jr - 6; px += 10) {
+        if (Math.abs(px - gate.cx) < 3) continue;
+        const dy = Math.sqrt(Math.max(0, (Ri - 3) ** 2 - (px - gate.cx) ** 2));
+        pd += `M${f(px)} ${f(archY - dy + 4)} L${f(px)} ${ground - 2}`;
+      }
+      el("path", { d: pd, class: "h" }, dg);
+      const bands = [ground - 30, ground - 78];
+      bands.forEach((by) => el("path", { d: `M${f(jl + 3)} ${by} L${f(jr - 3)} ${by} M${f(jl + 3)} ${by + 5} L${f(jr - 3)} ${by + 5}`, class: "o" }, dg));
+      el("circle", { cx: gate.cx - 8, cy: ground - 54, r: 3, class: "o" }, dg);
+      el("circle", { cx: gate.cx + 8, cy: ground - 54, r: 3, class: "o" }, dg);
+    }
+
+    // crenellation cap for the complete wall
+    if (kind === "complete") {
+      const capG = el("g", { class: "stone", style: `transition-delay:${courses * 90 + 200}ms` }, svg);
+      const yTop = ground - courses * courseH;
+      let x = 10;
+      while (x < W - 30) {
+        const w = 34;
+        el("path", { d: stonePath(x, yTop - 22, w, 21, r), class: "o" }, capG);
+        hatch(capG, x, yTop - 22, w, 21, r, 5);
+        x += w + 22;
+      }
+    }
+
+    // fallen rubble for the ruin
+    if (kind === "ruin") {
+      const rub = el("g", { class: "stone", style: `transition-delay:${courses * 90}ms` }, svg);
+      // heaps of fallen stone, piled where the wall broke
+      // timbers first so stones settle around them
+      [[150, ground - 14, 70, 8, -6], [360, ground - 10, 58, 7, 4], [470, ground - 40, 62, 7, 28], [jl - 8, ground - 22, 54, 7, -18]].forEach(([bx, by, len, th, ang]) => {
+        const a = ang * Math.PI / 180, mx = len / 2, my = th / 2;
+        const b = box(bx + mx * Math.cos(a) - my * Math.sin(a), by + mx * Math.sin(a) + my * Math.cos(a), len, th, ang);
+        b.n = 0; debris.push(b);
+        beam(rub, bx, by, len, th, ang);
+      });
+      for (let i = 0; i < 18; i++) {
+        const w = 20 + r() * 34, h = 12 + r() * 12;
+        let x = 14 + r() * (W - 70);
+        if (Math.abs(x + w / 2 - gate.cx) < 56) x += (x < gate.cx ? -70 : 70);
+        r();
+        const yb = ground - h + 3;
+        const deg = (r() - 0.5) * 70;
+        if (!tryPlace(box(x + w / 2, yb + h / 2, w, h, deg))) continue;
+        const g = el("g", { transform: `rotate(${f(deg)} ${f(x + w / 2)} ${f(yb + h / 2)})` }, rub);
+        el("path", { d: stonePath(x, yb, w, h, r), class: "o" }, g);
+        hatch(g, x, yb, w, h, r, 3.2, true);
+        if (r() < 0.4) crack(g, x, yb, w, h, r);
+      }
+      // grit and chips along the ground
+      let chips = "";
+      for (let i = 0; i < 40; i++) { const cx = r() * W, cy = ground - r() * 5; chips += `M${f(cx)} ${f(cy)} l${f(2 + r() * 4)} ${f(-1 - r() * 2)} l${f(2)} ${f(2)}Z`; }
+      el("path", { d: chips, class: "h" }, rub);
+      // scorched ground at the gate
+      el("ellipse", { cx: gate.cx, cy: ground - 2, rx: gate.w * 0.85, ry: 9, class: "char" }, rub);
+      // smoke: braided columns that curl as they thin out
+      const columns = [[gate.cx, ground - 46, 1], [96, ground - 3 * courseH - 6, 0.75], [500, ground - 2 * courseH - 6, 0.85]];
+      columns.forEach(([sx, sy, sc]) => {
+        for (let k = 0; k < 4; k++) {
+          // strands start together and fan out, drifting right as they rise
+          const off = (k - 1.5) * 4 * sc, H = (88 + k * 14) * sc, sw = (9 + k * 3) * sc, fan = (k - 1.5) * 16 * sc + 14 * sc;
+          const x2 = sx + off, top = sy - H;
+          const d = `M${f(x2)} ${f(sy)} C${f(x2 - sw)} ${f(sy - H * 0.28)} ${f(x2 + sw)} ${f(sy - H * 0.5)} ${f(x2 + fan * 0.4)} ${f(sy - H * 0.7)} S${f(x2 + fan * 1.1)} ${f(top + H * 0.08)} ${f(x2 + fan)} ${f(top)}`;
+          el("path", { d, class: "h", style: `opacity:${(0.62 - k * 0.1).toFixed(2)}` }, rub);
+        }
+      });
+      // embers drifting up
+      let em = "";
+      for (let k = 0; k < 16; k++) {
+        const c = columns[k % 3], ex = c[0] + (rb() - 0.3) * 60, ey = c[1] - 8 - rb() * 60;
+        el("circle", { cx: f(ex), cy: f(ey), r: f(0.9 + rb() * 0.9), fill: "currentColor", opacity: f(0.45 + rb() * 0.4) }, rub);
+      }
+    }
+
+    // half: scaffold pole and ladder on the work face
+    if (kind === "half") {
+      const sc = el("g", { class: "stone", style: `transition-delay:${courses * 90}ms` }, svg);
+      const lx = 440, top = ground - 4 * courseH - 46;
+      el("path", { d: `M${lx} ${ground} L${lx + 22} ${top} M${lx + 26} ${ground} L${lx + 48} ${top}`, class: "o" }, sc);
+      let rd = "";
+      for (let i = 1; i < 8; i++) {
+        const t = i / 8, y = ground + (top - ground) * t;
+        rd += `M${f(lx + 22 * t)} ${f(y)} L${f(lx + 26 + 22 * t)} ${f(y)}`;
+      }
+      el("path", { d: rd, class: "o" }, sc);
+      // a fresh stone waiting at the base
+      el("path", { d: stonePath(120, ground - 20, 46, 20, r), class: "o" }, sc);
+      hatch(sc, 120, ground - 20, 46, 20, r, 5);
+    }
+
+    // ground line
+    let gd = `M0 ${ground + 1}`;
+    for (let x = 20; x <= W; x += 20) gd += ` L${x} ${f(ground + 1 + (r() - 0.5) * 2)}`;
+    el("path", { d: gd, class: "o" }, svg);
+    let tufts = "";
+    for (let i = 0; i < (small ? 5 : 9); i++) {
+      const tx = r() * W;
+      if (Math.abs(tx - gate.cx) < gate.w / 2) continue;
+      tufts += `M${f(tx)} ${ground + 8} l${f(6 + r() * 10)} ${f((r() - 0.5) * 2)}`;
+    }
+    el("path", { d: tufts, class: "h" }, svg);
+
+    // ruin: stones that tumbled forward, scattered on the open ground in front of the wall
+    if (kind === "ruin") {
+      const fg = el("g", { class: "stone", style: `transition-delay:${courses * 90 + 160}ms` }, svg);
+      let placed = 0;
+      for (let i = 0; i < 40 && placed < 3; i++) {
+        const w = 18 + rb() * 26, h = 11 + rb() * 9;
+        const x = 20 + rb() * (W - 60 - w);
+        const yb = ground + 14 + rb() * 26;           // well clear of the wall foot
+        const deg = (rb() - 0.5) * 60;
+        if (!tryPlace(box(x + w / 2, yb + h / 2, w, h, deg))) continue;
+        placed++;
+        const g = el("g", { transform: `rotate(${f(deg)} ${f(x + w / 2)} ${f(yb + h / 2)})` }, fg);
+        el("path", { d: stonePath(x, yb, w, h, rb), class: "o" }, g);
+        hatch(g, x, yb, w, h, rb, 3.4, rb() < 0.5);
+        // contact shadow on the ground
+        el("path", { d: `M${f(x + 2)} ${f(yb + h + 3)} q${f(w / 2)} ${f(3)} ${f(w - 2)} 0`, class: "h" }, fg);
+      }
+    }
+  }
+
+  document.querySelectorAll("svg[data-wall]").forEach((svg) => {
+    drawWall(svg);
+    // crop the canvas to the drawing so a low wall is not lost in empty sky
+    try { const b = svg.getBBox(); const pad = 8; svg.setAttribute("viewBox", `0 ${f(b.y - pad)} 600 ${f(b.height + pad * 2)}`); } catch (e) {}
+  });
+
+  /* ---------- friends holding hands with Jesus, in marker doodle ---------- */
+  function drawPeople(svg) {
+    const P = (d, cls, parent) => el("path", { d, class: cls }, parent);
+    const style = el("style", {}, svg);
+    style.textContent = `.m{fill:none;stroke:currentColor;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+      .k{fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round}
+      .p{fill:var(--paper);stroke:currentColor;stroke-width:3.4;stroke-linejoin:round}
+      .w{fill:var(--paper);stroke:none}
+`;
+    const defs = el("defs", {}, svg);
+    const flt = el("filter", { id: "pp-wobble", x: "-5%", y: "-5%", width: "110%", height: "110%" }, defs);
+    el("feTurbulence", { type: "fractalNoise", baseFrequency: "0.03", numOctaves: "2", seed: "3" }, flt);
+    el("feDisplacementMap", { in: "SourceGraphic", scale: "3" }, flt);
+
+    const g = el("g", { filter: "url(#pp-wobble)" }, svg);
+    const ground = 300;
+    const face = (cx, cy, r) => {
+      el("circle", { cx: cx - r * 0.33, cy: cy - r * 0.12, r: 2.4, class: "k" }, g);
+      el("circle", { cx: cx + r * 0.33, cy: cy - r * 0.12, r: 2.4, class: "k" }, g);
+      P(`M${f(cx - r * 0.42)} ${f(cy + r * 0.22)} Q${f(cx)} ${f(cy + r * 0.72)} ${f(cx + r * 0.42)} ${f(cy + r * 0.22)}`, "m", g);
+    };
+    const foot = (x, y, dir) => el("ellipse", { cx: f(x + dir * 5), cy: f(y), rx: 6.5, ry: 4.5, class: "p" }, g);
+
+    // stick friend: returns its shoulder point for hand-holding
+    function friend(cx, r, body, opts) {
+      const hy = ground - body - r - 52;            // head centre
+      const sh = hy + r + 14, hip = hy + r + body;
+      P(`M${cx} ${f(hy + r)} L${cx} ${f(hip)}`, "m", g);
+      P(`M${cx} ${f(hip)} L${f(cx - 15)} ${f(ground - 4)} M${cx} ${f(hip)} L${f(cx + 15)} ${f(ground - 4)}`, "m", g);
+      foot(cx - 15, ground, -1); foot(cx + 15, ground, 1);
+      el("circle", { cx, cy: f(hy), r, class: "p" }, g);
+      if (opts.hair === "long") {
+        P(`M${f(cx - r)} ${f(hy)} C${f(cx - r - 4)} ${f(hy + r * 1.4)} ${f(cx - r - 2)} ${f(hy + r * 1.7)} ${f(cx - r * 0.6)} ${f(hy + r * 1.8)} M${f(cx + r)} ${f(hy)} C${f(cx + r + 4)} ${f(hy + r * 1.4)} ${f(cx + r + 2)} ${f(hy + r * 1.7)} ${f(cx + r * 0.6)} ${f(hy + r * 1.8)}`, "m", g);
+        P(`M${f(cx - r * 0.9)} ${f(hy - r * 0.35)} Q${f(cx - r * 0.2)} ${f(hy - r * 1.05)} ${f(cx + r * 0.9)} ${f(hy - r * 0.35)}`, "m", g);
+      }
+      if (opts.hair === "tuft") P(`M${f(cx - 4)} ${f(hy - r)} q${f(-2)} ${f(-9)} ${f(4)} ${f(-12)} M${f(cx + 2)} ${f(hy - r)} q${f(3)} ${f(-8)} ${f(9)} ${f(-8)}`, "m", g);
+      face(cx, hy, r);
+      return { cx, sh, hy, r };
+    }
+
+    // Jesus: centre-parted hair to the shoulders, full beard, long robe with a mantle, sandals
+    function jesus(cx) {
+      const r = 22, hy = ground - 166, sh = hy + r + 14, hem = ground - 10;
+            // sandalled feet under the hem
+      foot(cx - 9, ground, -1); foot(cx + 9, ground, 1);
+      P(`M${f(cx - 16)} ${f(ground - 4)} l${f(6)} ${f(5)} M${f(cx + 16)} ${f(ground - 4)} l${f(-6)} ${f(5)}`, "m", g);
+      // long A-line robe
+      const robe = `M${f(cx - 9)} ${f(hy + r - 1)} L${f(cx - 24)} ${f(sh + 2)} C${f(cx - 27)} ${f(sh + 40)} ${f(cx - 30)} ${f(hem - 30)} ${f(cx - 33)} ${f(hem)} L${f(cx + 33)} ${f(hem)} C${f(cx + 30)} ${f(hem - 30)} ${f(cx + 27)} ${f(sh + 40)} ${f(cx + 24)} ${f(sh + 2)} L${f(cx + 9)} ${f(hy + r - 1)}Z`;
+      P(robe, "p", g);
+      // mantle sash over one shoulder, solid ink
+      P(`M${f(cx - 22)} ${f(sh + 2)} L${f(cx - 10)} ${f(sh - 2)} L${f(cx + 29)} ${f(sh + 70)} L${f(cx + 29)} ${f(sh + 90)}Z`, "k", g);
+      // a couple of robe folds
+      P(`M${f(cx - 12)} ${f(sh + 60)} q${f(-3)} ${f(30)} ${f(-6)} ${f(hem - sh - 64)} M${f(cx + 6)} ${f(sh + 96)} q${f(2)} ${f(16)} ${f(4)} ${f(hem - sh - 100)}`, "m", g).setAttribute("style", "stroke-width:2");
+      // face
+      el("circle", { cx, cy: hy, r, class: "p" }, g);
+      // hair parted in the middle, framing the face and falling past the shoulders
+      // slim locks that hug the crown, then fall in waves past the shoulders
+      const lock = (sx) => {
+        const o = (d) => cx + sx * d;
+        return `M${f(o(1.5))} ${f(hy - r - 2)}`
+          + ` C${f(o(r * 0.7))} ${f(hy - r - 4)} ${f(o(r + 4))} ${f(hy - r * 0.6)} ${f(o(r + 4))} ${f(hy)}`
+          + ` C${f(o(r + 4))} ${f(hy + 10)} ${f(o(r + 8))} ${f(hy + 16)} ${f(o(r + 6))} ${f(hy + r + 2)}`
+          + ` C${f(o(r + 5))} ${f(hy + r + 10)} ${f(o(r + 10))} ${f(hy + r + 14)} ${f(o(r + 7))} ${f(hy + r + 21)}`
+          + ` C${f(o(r + 3))} ${f(hy + r + 20)} ${f(o(r - 1))} ${f(hy + r + 16)} ${f(o(r - 2))} ${f(hy + r + 8)}`
+          + ` C${f(o(r - 1))} ${f(hy + r - 4)} ${f(o(r - 3))} ${f(hy + 10)} ${f(o(r - 1.5))} ${f(hy + 2)}`
+          + ` C${f(o(r - 1))} ${f(hy - r * 0.5)} ${f(o(r * 0.55))} ${f(hy - r + 5)} ${f(o(1.5))} ${f(hy - r + 3)}Z`;
+      };
+      P(lock(-1), "k", g); P(lock(1), "k", g);
+      [-1, 1].forEach((sx) => P(`M${f(cx + sx * (r + 2))} ${f(hy - 2)} C${f(cx + sx * (r + 3))} ${f(hy + 12)} ${f(cx + sx * (r + 5))} ${f(hy + 18)} ${f(cx + sx * (r + 3))} ${f(hy + r + 10)}`, "m", g).setAttribute("style", "stroke:var(--paper);stroke-width:1.2"));
+      // eyes, kind brows
+      el("circle", { cx: cx - 7, cy: hy - 3, r: 2.3, class: "k" }, g);
+      el("circle", { cx: cx + 7, cy: hy - 3, r: 2.3, class: "k" }, g);
+      // full beard and moustache, with a soft smile line
+      P(`M${f(cx - r + 6)} ${f(hy + 3)} C${f(cx - r + 4)} ${f(hy + r + 4)} ${f(cx - 6)} ${f(hy + r + 12)} ${f(cx)} ${f(hy + r + 13)} C${f(cx + 6)} ${f(hy + r + 12)} ${f(cx + r - 4)} ${f(hy + r + 4)} ${f(cx + r - 6)} ${f(hy + 3)} C${f(cx + 10)} ${f(hy + 8)} ${f(cx - 10)} ${f(hy + 8)} ${f(cx - r + 6)} ${f(hy + 3)}Z`, "k", g);
+      P(`M${f(cx - 6)} ${f(hy + 12)} Q${f(cx)} ${f(hy + 16)} ${f(cx + 6)} ${f(hy + 12)}`, "m", g).setAttribute("style", "stroke:var(--paper);stroke-width:2.4");
+      return { cx, sh: sh + 4, hy, r, robe: true };
+    }
+
+    // a row of friends: tall, child, Jesus, long hair, tuft
+    const a = friend(98, 20, 66, {});
+    const b = friend(196, 16, 46, { hair: "tuft" });
+    const j = jesus(300);
+    const c = friend(404, 19, 62, { hair: "long" });
+    const d = friend(502, 20, 70, {});
+    const row = [a, b, j, c, d];
+    // joined hands between neighbours
+    for (let i = 0; i < row.length - 1; i++) {
+      const L = row[i], Rt = row[i + 1];
+      const hx = (L.cx + Rt.cx) / 2, hy2 = Math.max(L.sh, Rt.sh) + 30;
+      const lx = L.cx + (L.robe ? 20 : 0), rx = Rt.cx - (Rt.robe ? 20 : 0);
+      const arm = (sx, sy, tx, ty, robe) => {
+        if (!robe) { P(`M${f(sx)} ${f(sy)} L${f(tx)} ${f(ty)}`, "m", g); return; }
+        // wide sleeve to 60%, then the hand
+        const mx = sx + (tx - sx) * 0.6, my = sy + (ty - sy) * 0.6;
+        const nx = -(ty - sy), ny = tx - sx, nl = Math.hypot(nx, ny), ux = nx / nl, uy = ny / nl;
+        P(`M${f(sx + ux * 5)} ${f(sy + uy * 5)} L${f(mx + ux * 9)} ${f(my + uy * 9)} L${f(mx - ux * 9)} ${f(my - uy * 9)} L${f(sx - ux * 5)} ${f(sy - uy * 5)}Z`, "p", g);
+        P(`M${f(mx)} ${f(my)} L${f(tx)} ${f(ty)}`, "m", g);
+      };
+      arm(lx, L.sh, hx - 3, hy2, L.robe);
+      arm(rx, Rt.sh, hx + 3, hy2, Rt.robe);
+      el("circle", { cx: f(hx), cy: f(hy2), r: 5.5, class: "p" }, g);
+    }
+    // the ends: one waves, one rests
+    P(`M${a.cx} ${f(a.sh)} L${f(a.cx - 34)} ${f(a.sh - 34)} M${f(a.cx - 40)} ${f(a.sh - 44)} l${f(-6)} ${f(-6)} M${f(a.cx - 30)} ${f(a.sh - 48)} l${f(-2)} ${f(-8)}`, "m", g);
+    P(`M${d.cx} ${f(d.sh)} L${f(d.cx + 26)} ${f(d.sh + 40)}`, "m", g);
+
+    // crop to the drawing
+    try { const bb = g.getBBox(); svg.setAttribute("viewBox", `${f(bb.x - 10)} ${f(bb.y - 10)} ${f(bb.width + 20)} ${f(bb.height + 20)}`); } catch (e) {}
+  }
+  const ppl = document.getElementById("people");
+  if (ppl) drawPeople(ppl);
+
+  /* build-in motion: the wall rises course by course when it enters view */
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && "IntersectionObserver" in window) {
+    root.classList.add("js-anim");
+    const io = new IntersectionObserver((entries) => {
+      // build when 35% visible; tear down once fully off-screen so it rebuilds on the way back
+      entries.forEach((e) => {
+        if (e.intersectionRatio >= 0.35) e.target.classList.add("is-built");
+        else if (!e.isIntersecting) e.target.classList.remove("is-built");
+      });
+    }, { threshold: [0, 0.35] });
+    document.querySelectorAll(".wall").forEach((w) => io.observe(w));
+  }
+
+  /* ---------- step rail ---------- */
+  const rail = document.getElementById("rail");
+  const railLinks = [...rail.querySelectorAll("a")];
+  const steps = railLinks.map((a) => document.querySelector(a.getAttribute("href")));
+  const onScroll = () => {
+    rail.classList.toggle("is-scrolled", scrollY > 4);
+    const line = innerHeight * 0.35;
+    let cur = -1;
+    steps.forEach((s, i) => { if (s.getBoundingClientRect().top < line) cur = i; });
+    railLinks.forEach((a, i) => {
+      if (i === cur) {
+        if (a.getAttribute("aria-current") !== "step") {
+          a.setAttribute("aria-current", "step");
+          const strip = a.closest("ol");
+          strip.scrollTo({ left: a.offsetLeft - (strip.clientWidth - a.offsetWidth) / 2, behavior: reduce ? "auto" : "smooth" });
+        }
+      } else a.removeAttribute("aria-current");
+    });
+  };
+  let ticking = false;
+  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; onScroll(); }); } }, { passive: true });
+  addEventListener("resize", onScroll);
+  onScroll();
+
+  /* ---------- placeholder sheet (until real scores arrive) ---------- */
+  function placeholderSVG(title) {
+    const lines = [];
+    for (let s = 0; s < 6; s++) {
+      const y0 = 230 + s * 150;
+      for (let l = 0; l < 5; l++) lines.push(`<path d="M70 ${y0 + l * 12}H730" stroke="currentColor" stroke-width="1.2" opacity=".35"/>`);
+    }
+    const t = title.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    return `<svg class="placeholder-sheet" viewBox="0 0 800 1040" xmlns="${NS}" role="img" aria-label="${t} 악보 자리">
+      <rect width="800" height="1040" fill="#fbf9f5"/>
+      <text x="400" y="120" text-anchor="middle" font-size="40" font-weight="800" fill="currentColor">${t}</text>
+      ${lines.join("")}
+      <rect x="230" y="455" width="340" height="96" rx="48" fill="#fbf9f5" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 6"/>
+      <text x="400" y="514" text-anchor="middle" font-size="28" font-weight="700" fill="currentColor">악보가 곧 들어갑니다</text>
+    </svg>`;
+  }
+
+  /* ---------- score slots ---------- */
+  const expandIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg>`;
+  document.querySelectorAll("[data-score]").forEach((sec) => {
+    const key = sec.dataset.score, cfg = SCORES[key];
+    const box = sec.querySelector(".score");
+    const pages = cfg.pages.length ? cfg.pages : [null];
+    pages.forEach((src, i) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "score-btn";
+      b.setAttribute("aria-label", `${cfg.title} 악보${pages.length > 1 ? ` ${i + 1}장` : ""} 크게 보기`);
+      const sheet = document.createElement("span");
+      sheet.className = "score-sheet";
+      sheet.innerHTML = src ? `<img src="${src}" alt="" loading="lazy" decoding="async">` : placeholderSVG(cfg.title);
+      b.appendChild(sheet);
+      if (i === pages.length - 1 || pages.length === 1) b.insertAdjacentHTML("beforeend", `<span class="score-tag">${expandIcon}크게 보기</span>`);
+      b.addEventListener("click", () => openViewer(key, i));
+      box.appendChild(b);
+    });
+  });
+
+  /* ---------- viewer: pinch / drag / wheel / double-tap ---------- */
+  const viewer = document.getElementById("viewer");
+  const stage = document.getElementById("stage");
+  const vTitle = document.getElementById("viewerTitle");
+  const vCount = document.getElementById("viewerCount");
+  const btn = (a) => viewer.querySelector(`[data-act="${a}"]`);
+  let cur = { key: null, i: 0, pages: [] };
+  let page = null, natW = 800, natH = 1040;
+  let s = 1, tx = 0, ty = 0, fitS = 1;
+  const pointers = new Map();
+  let pinch = null, drag = null, lastTap = 0, swipe = null;
+
+  const apply = (anim) => {
+    if (!page) return;
+    page.style.transition = anim ? "transform .3s cubic-bezier(.16,1,.3,1)" : "none";
+    page.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
+  };
+  const clamp = () => {
+    const r = stage.getBoundingClientRect();
+    const w = natW * s, h = natH * s;
+    // page origin is stage centre; tx/ty is the offset of the page's top-left from centre
+    const minX = w > r.width ? r.width / 2 - w : -w / 2, maxX = w > r.width ? -r.width / 2 : -w / 2;
+    const minY = h > r.height ? r.height / 2 - h : -h / 2, maxY = h > r.height ? -r.height / 2 : -h / 2;
+    tx = Math.min(maxX, Math.max(minX, tx));
+    ty = Math.min(maxY, Math.max(minY, ty));
+  };
+  const fit = (anim) => {
+    const r = stage.getBoundingClientRect();
+    fitS = Math.min((r.width - 24) / natW, (r.height - 16) / natH);
+    s = fitS; tx = -natW * s / 2; ty = -natH * s / 2; apply(anim);
+  };
+  const zoomAt = (ns, cx, cy, anim) => {
+    ns = Math.min(fitS * 6, Math.max(fitS, ns));
+    const r = stage.getBoundingClientRect();
+    const px = cx - r.left - r.width / 2, py = cy - r.top - r.height / 2;
+    tx = px - (px - tx) * (ns / s); ty = py - (py - ty) * (ns / s); s = ns;
+    clamp(); apply(anim);
+  };
+
+  function show(i) {
+    cur.i = (i + cur.pages.length) % cur.pages.length;
+    const src = cur.pages[cur.i];
+    stage.innerHTML = "";
+    if (src) {
+      page = new Image(); page.alt = `${vTitle.textContent} ${cur.i + 1}장`; page.draggable = false;
+      page.className = "viewer-page";
+      page.onload = () => {
+        const pad = Math.round(Math.max(page.naturalWidth, page.naturalHeight) * 0.035);
+        page.style.padding = pad + "px"; page.style.boxSizing = "content-box"; page.style.background = "#fff";
+        page.style.width = page.naturalWidth + "px"; page.style.height = page.naturalHeight + "px";
+        natW = page.naturalWidth + pad * 2; natH = page.naturalHeight + pad * 2; fit(false);
+      };
+      page.src = src;
+    } else {
+      page = document.createElement("div");
+      page.className = "viewer-page"; natW = 800; natH = 1040;
+      page.style.width = natW + "px"; page.style.height = natH + "px";
+      page.innerHTML = placeholderSVG(SCORES[cur.key].title);
+    }
+    stage.appendChild(page);
+    if (!src) fit(false);
+    const many = cur.pages.length > 1;
+    vCount.textContent = many ? `${cur.i + 1} / ${cur.pages.length}` : "";
+    btn("prev").hidden = btn("next").hidden = !many;
+    if (!many) vCount.innerHTML = `<span class="viewer-hint">두 손가락으로 확대 · 두 번 탭하면 확대/축소</span>`;
+  }
+
+  function openViewer(key, i) {
+    const cfg = SCORES[key];
+    cur = { key, i, pages: cfg.pages.length ? cfg.pages : [null] };
+    vTitle.textContent = cfg.title;
+    viewer.showModal();
+    document.body.style.overflow = "hidden";
+    show(i);
+  }
+  viewer.addEventListener("close", () => { document.body.style.overflow = ""; stage.innerHTML = ""; page = null; });
+  btn("close").addEventListener("click", () => viewer.close());
+  btn("fit").addEventListener("click", () => fit(true));
+  btn("prev").addEventListener("click", () => show(cur.i - 1));
+  btn("next").addEventListener("click", () => show(cur.i + 1));
+  addEventListener("resize", () => viewer.open && fit(false));
+  viewer.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") show(cur.i + 1);
+    else if (e.key === "ArrowLeft") show(cur.i - 1);
+    else if (e.key === "+" || e.key === "=") { const r = stage.getBoundingClientRect(); zoomAt(s * 1.4, r.left + r.width / 2, r.top + r.height / 2, true); }
+    else if (e.key === "-") { const r = stage.getBoundingClientRect(); zoomAt(s / 1.4, r.left + r.width / 2, r.top + r.height / 2, true); }
+  });
+
+  stage.addEventListener("wheel", (e) => { e.preventDefault(); zoomAt(s * Math.exp(-e.deltaY * 0.0022), e.clientX, e.clientY, false); }, { passive: false });
+
+  stage.addEventListener("pointerdown", (e) => {
+    stage.setPointerCapture(e.pointerId);
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 2) {
+      const [a, b] = [...pointers.values()];
+      pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), s, cx: (a.x + b.x) / 2, cy: (a.y + b.y) / 2 };
+      drag = null; swipe = null;
+    } else if (pointers.size === 1) {
+      drag = { x: e.clientX, y: e.clientY, tx, ty };
+      swipe = s <= fitS * 1.02 ? { x: e.clientX, y: e.clientY, t: performance.now() } : null;
+      stage.classList.add("is-dragging");
+    }
+  });
+  stage.addEventListener("pointermove", (e) => {
+    if (!pointers.has(e.pointerId)) return;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pinch && pointers.size === 2) {
+      const [a, b] = [...pointers.values()];
+      const d = Math.hypot(a.x - b.x, a.y - b.y);
+      const cx = (a.x + b.x) / 2, cy = (a.y + b.y) / 2;
+      zoomAt(pinch.s * (d / pinch.d), cx, cy, false);
+      tx += cx - pinch.cx; ty += cy - pinch.cy; pinch.cx = cx; pinch.cy = cy; clamp(); apply(false);
+    } else if (drag && s > fitS * 1.02) {
+      tx = drag.tx + (e.clientX - drag.x); ty = drag.ty + (e.clientY - drag.y); clamp(); apply(false);
+    }
+  });
+  const end = (e) => {
+    if (!pointers.has(e.pointerId)) return;
+    pointers.delete(e.pointerId);
+    stage.classList.remove("is-dragging");
+    if (pointers.size < 2) pinch = null;
+    if (pointers.size === 0) {
+      const now = performance.now();
+      if (swipe && cur.pages.length > 1) {
+        const dx = e.clientX - swipe.x, dy = e.clientY - swipe.y;
+        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5 && now - swipe.t < 600) { show(cur.i + (dx < 0 ? 1 : -1)); swipe = null; drag = null; return; }
+      }
+      const moved = drag ? Math.hypot(e.clientX - drag.x, e.clientY - drag.y) : 99;
+      if (moved < 8) {
+        if (now - lastTap < 300) { zoomAt(s > fitS * 1.1 ? fitS : fitS * 2.5, e.clientX, e.clientY, true); lastTap = 0; }
+        else lastTap = now;
+      }
+      drag = null; swipe = null;
+    }
+  };
+  stage.addEventListener("pointerup", end);
+  stage.addEventListener("pointercancel", end);
+})();
+</script>
+</body>
+</html>
