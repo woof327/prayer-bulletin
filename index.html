@@ -299,7 +299,7 @@ main { padding: 0 var(--gutter); }
   padding: 10px 12px max(14px, env(safe-area-inset-bottom));
   font-family: var(--display); font-weight: 700; font-size: 14px;
 }
-.viewer-hint { color: rgba(255,255,255,.6); font-family: var(--read); font-weight: 400; font-size: 13px; }
+.viewer-foot[hidden] { display: none; }
 .viewer-count { min-width: 3.5em; text-align: center; font-variant-numeric: tabular-nums; }
 
 @media (min-width: 720px) {
@@ -1144,7 +1144,7 @@ const SCORES = {
     const many = cur.pages.length > 1;
     vCount.textContent = many ? `${cur.i + 1} / ${cur.pages.length}` : "";
     btn("prev").hidden = btn("next").hidden = !many;
-    if (!many) vCount.innerHTML = `<span class="viewer-hint">두 손가락으로 확대 · 두 번 탭하면 확대/축소</span>`;
+    viewer.querySelector(".viewer-foot").hidden = !many;
   }
 
   function openViewer(key, i) {
